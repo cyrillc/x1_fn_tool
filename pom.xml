@@ -7,7 +7,7 @@
     <groupId>ch.cyrillc.x1_fn.app</groupId>
     <artifactId>x1_fn</artifactId>
     <packaging>jar</packaging>
-    <version>0.10tui</version>
+    <version>0.55-TUI</version>
     <name>X1_FN</name>
 
     <dependencies>
@@ -25,11 +25,6 @@
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity</artifactId>
             <version>1.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.ant</groupId>
-            <artifactId>ant</artifactId>
-            <version>1.8.1</version>
         </dependency>
     </dependencies>
 

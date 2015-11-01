@@ -13,7 +13,7 @@ import java.util.Observer;
 import java.util.Scanner;
 
 /**
- * Created by Fabian on 01.11.15.
+ * Created by CyrillC on 01.11.15.
  */
 public class TextUserInterface implements Observer{
 
@@ -103,7 +103,7 @@ public class TextUserInterface implements Observer{
 
     private void printMenu() {
         System.out.println("list"+Util.cellDistance(4,6)+"List all Settings for Lenovo Keyboard");
-        System.out.println("add <APPNAME> <APPPATH>"+Util.cellDistance("add <APPNAME> <APPPATH>",6)+"Add Application");
+        System.out.println("add <APPNAME> <TYPE> <APPPATH>"+Util.cellDistance("add <APPNAME> <TYPE> <APPPATH>",6)+"Add Application");
         System.out.println("del <APPNAME>"+Util.cellDistance(13,6)+"Remove Application assignment (keyboard goes back to default)");
         System.out.println("change <APPNAME> <newFunctionSet>"+Util.cellDistance("change <APPNAME> <newFunctionSet>",6)+"Change Application assignment");
         System.out.println("quit"+Util.cellDistance(4,6)+"Close Application");

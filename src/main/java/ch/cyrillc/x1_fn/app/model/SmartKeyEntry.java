@@ -3,7 +3,7 @@ package ch.cyrillc.x1_fn.app.model;
 import ch.cyrillc.x1_fn.app.utils.Constants;
 
 /**
- * Created by Fabian on 31.10.15.
+ * Created by CyrillC on 31.10.15.
  */
 public class SmartKeyEntry {
 

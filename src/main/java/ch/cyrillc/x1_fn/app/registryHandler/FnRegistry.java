@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Fabian on 31.10.15.
+ * Created by CyrillC on 31.10.15.
  */
 public class FnRegistry {
 
@@ -75,23 +75,6 @@ public class FnRegistry {
             default: return Constants.SMARTKEY_TREE_HOME;
         }
     }
-//    WindowsRegistry reg = WindowsRegistry.getInstance();
-//    String tree = "SOFTWARE\\Lenovo\\SmartKey\\Application\\Row\\Function\\IntelliJ";
-//    String value = reg.readString(HKey.HKCU, tree, "AppPath");
-//    System.out.println("App path tho IntelliJ= " + value);
-//
-//    String functionTree = "SOFTWARE\\Lenovo\\SmartKey\\Application\\Row\\Function";
-//    String newKeyWithTree = functionTree+"\\testapp";
-//    reg.createKey(HKey.HKCU,newKeyWithTree);
-//    reg.writeStringValue(HKey.HKCU,newKeyWithTree,"AppPath","Some weird path =)");
-//
-//    List<String> appApps = reg.readStringSubKeys(HKey.HKCU,functionTree);
-//    System.out.println("All Apps with Function keyboard:");
-//    for (String appname : appApps) {
-//        System.out.println(appname  );
-//    }
-//
-//    reg.deleteKey(HKey.HKCU,newKeyWithTree);
 
 }
 

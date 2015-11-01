@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 /**
- * Created by Fabian on 01.11.15.
+ * Created by CyrillC on 01.11.15.
  */
 public class Util {
     public static void printEntriesOnConsole(List<SmartKeyEntry> smartKeyEntries) {
@@ -40,6 +40,13 @@ public class Util {
             returnString+= " ";
         }
         return returnString;
+    }
+
+    public static void printSmartKeyEntry(SmartKeyEntry entry) {
+        System.out.println("Entry ->"+entry.toString());
+        System.out.println("AppName= "+entry.getAppName());
+        System.out.println("AppPath= "+entry.getAppPath());
+        System.out.println("FunctionType= "+entry.getSmartKeyType().name());
     }
 
     /**

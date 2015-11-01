@@ -11,7 +11,7 @@ import ch.cyrillc.x1_fn.app.view.TextUserInterface;
 import com.github.sarxos.winreg.RegistryException;
 
 /**
- * Created by Fabian on 01.11.15.
+ * Created by CyrillC on 01.11.15.
  */
 public class FnController implements TextUserInterfaceEventListener {
 
@@ -48,13 +48,10 @@ public class FnController implements TextUserInterfaceEventListener {
             }
 
             case ADD: {
-                if(!event.getOptions().matches(".+ .+ (.*\\.*)")) {
-                    tui.illegalInput("Options are not ok");
-                } else {
+                if(checkOptionInput(event.getOptions(),".+ .+ (.*\\.*)")) {
                     String appName = event.getOptions().split(" ")[0];
                     String smartKeyTypeString = event.getOptions().split(" ")[1];
                     String appPath = event.getOptions().split(" ")[2];
-                    System.out.println(event.getOptions()+"\nAppName:"+appName+" SmartKey:"+smartKeyTypeString+" appPath"+appPath);
                     ESmartKeyType smartKeyType =ESmartKeyType.getEnum(smartKeyTypeString);
                     if(smartKeyType == ESmartKeyType.UNKNOWN ){
                         tui.illegalInput("Unknown SmartKeyType");
@@ -67,12 +64,38 @@ public class FnController implements TextUserInterfaceEventListener {
                             tui.error("Could not add entry. registryException->"+e);
                         }
                     }
-
                 }
-
+                break;
+            }
+            case DELETE:{
+               if(checkOptionInput(event.getOptions().replace(" ",""),".+")){
+                   String appName = event.getOptions().replace(" ","");
+                   try {
+                       if(model.appNameExists(appName)){
+                           model.removeEntry(new SmartKeyEntry(appName));
+                       } else{
+                           tui.illegalInput("AppName was not found in registry");
+                       }
+                   } catch (RegistryException e) {
+                       tui.error("Could not remove entry. registryException->"+e.getMessage());
+                   }
+               }
+                break;
+            }
+            case CHANGE:{
+                tui.error("NOT YET IMPLEMENTED");
+                break;
             }
         }
 
+    }
+
+    private boolean checkOptionInput(String options, String regex) {
+        if(!options.matches(regex)) {
+            tui.illegalInput("Options are not ok");
+            return false;
+        }
+        else return true;
     }
 
     private boolean checkPath(String appPath) {

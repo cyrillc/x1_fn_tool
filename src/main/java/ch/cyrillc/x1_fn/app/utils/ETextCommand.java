@@ -3,7 +3,7 @@ package ch.cyrillc.x1_fn.app.utils;
 import java.util.ArrayList;
 
 /**
- * Created by Fabian on 01.11.15.
+ * Created by CyrillC on 01.11.15.
  */
 public enum ETextCommand {
     HELP("h","menu"),QUIT("q","exit"),LIST("l"),ADD("a","create"),CHANGE("c"),DELETE("d","del"), UNKNOWN;

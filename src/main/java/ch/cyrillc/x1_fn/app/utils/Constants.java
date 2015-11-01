@@ -1,7 +1,7 @@
 package ch.cyrillc.x1_fn.app.utils;
 
 /**
- * Created by Fabian on 31.10.15.
+ * Created by CyrillC on 31.10.15.
  */
 public class Constants {
 

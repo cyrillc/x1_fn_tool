@@ -3,7 +3,7 @@ package ch.cyrillc.x1_fn.app.utils;
 import java.util.EventObject;
 
 /**
- * Created by Fabian on 01.11.15.
+ * Created by CyrillC on 01.11.15.
  */
 public class TextUserInterfaceEvent extends EventObject{
 

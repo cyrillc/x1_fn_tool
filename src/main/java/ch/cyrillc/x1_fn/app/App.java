@@ -5,8 +5,7 @@ import ch.cyrillc.x1_fn.app.utils.Util;
 import java.util.HashMap;
 
 /**
- * Hello world!
- *
+ * created by CyrillC on 31.10.15
  */
 public class App 
 {
