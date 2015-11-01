@@ -1,9 +1,10 @@
 package ch.cyrillc.x1_fn.app;
 
 
-import ch.cyrillc.x1_fn.model.ESmartKeyType;
-import ch.cyrillc.x1_fn.registryHandler.FnRegistry;
-import ch.cyrillc.x1_fn.utils.Util;
+import ch.cyrillc.x1_fn.app.controller.FnController;
+import ch.cyrillc.x1_fn.app.model.ESmartKeyType;
+import ch.cyrillc.x1_fn.app.registryHandler.FnRegistry;
+import ch.cyrillc.x1_fn.app.utils.Util;
 import com.github.sarxos.winreg.RegistryException;
 
 /**
@@ -13,6 +14,9 @@ import com.github.sarxos.winreg.RegistryException;
 public class App 
 {
     public static void main( String[] args ) {
+        FnController controller = new FnController();
+        controller.runLoop();
+        System.out.println("TEST END -------------------------------------------");
         System.out.println( "Build by Cyrillc" );
 
         FnRegistry fnreg = new FnRegistry();

@@ -1,6 +1,6 @@
-package ch.cyrillc.x1_fn.model;
+package ch.cyrillc.x1_fn.app.model;
 
-import ch.cyrillc.x1_fn.utils.Constants;
+import ch.cyrillc.x1_fn.app.utils.Constants;
 
 /**
  * Created by Fabian on 31.10.15.

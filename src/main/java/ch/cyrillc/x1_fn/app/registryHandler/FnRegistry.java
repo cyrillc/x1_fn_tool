@@ -1,8 +1,8 @@
-package ch.cyrillc.x1_fn.registryHandler;
+package ch.cyrillc.x1_fn.app.registryHandler;
 
-import ch.cyrillc.x1_fn.model.ESmartKeyType;
-import ch.cyrillc.x1_fn.model.SmartKeyEntry;
-import ch.cyrillc.x1_fn.utils.Constants;
+import ch.cyrillc.x1_fn.app.model.ESmartKeyType;
+import ch.cyrillc.x1_fn.app.model.SmartKeyEntry;
+import ch.cyrillc.x1_fn.app.utils.Constants;
 import com.github.sarxos.winreg.HKey;
 import com.github.sarxos.winreg.RegistryException;
 import com.github.sarxos.winreg.WindowsRegistry;
@@ -39,6 +39,12 @@ public class FnRegistry {
         return smartKeyEntries;
     }
 
+
+    /**
+     * Reads all Registry Entries for the Lenovo SmartKey Tree
+     * @return ArrayList of SmartKeyEntries in all Types of SmartKeys
+     * @throws RegistryException
+     */
     public ArrayList<SmartKeyEntry> getAllEntries() throws RegistryException {
         ArrayList<SmartKeyEntry> smartKeyEntries = new ArrayList<SmartKeyEntry>();
         smartKeyEntries.addAll(this.getEntrysIn(ESmartKeyType.HOME));
@@ -48,12 +54,11 @@ public class FnRegistry {
         return smartKeyEntries;
     }
 
-    private SmartKeyEntry createSmartKeyFromEntry(String tree){
-        SmartKeyEntry entry = null;
 
-        //TODO: Implement do I need it though?
-
-        return entry;
+    public void writeSmartKeyEntry(SmartKeyEntry entry) throws RegistryException{
+        String keyTree = getTreeFor(entry.getSmartKeyType())+"\\"+entry.getAppName();
+        registry.createKey(HKey.HKCU,keyTree);
+        registry.writeStringValue(HKey.HKCU,keyTree,Constants.SMARTKEY_APPATH_NAME,entry.getAppPath());
     }
 
     private String getTreeFor(ESmartKeyType smartKeyType) {
