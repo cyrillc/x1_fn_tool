@@ -64,15 +64,16 @@ public class TextUserInterface implements Observer{
     private boolean handleInput(boolean close, String answer) {
         String cmd = answer.split(" ")[0];
         ETextCommand command = ETextCommand.translateCommand(cmd);
-        String input = (answer.contains(" ")?answer.substring(answer.indexOf(" ")):"");
+        //+1 Needed to remove the space in front
+        String input = (answer.contains(" ")?answer.substring(answer.indexOf(" ")+1):"");
 
         if(command == ETextCommand.QUIT){
             close = true;
         } else if(command == ETextCommand.HELP) {
             printMenu();
         } else if(command == ETextCommand.UNKNOWN){
-            System.out.println("Couldn't find command "+cmd);
-            System.out.println("Enter h for an overview" + cmd);
+            System.out.println("Command not found");
+            System.out.println("Enter h for Help" );
         } else {
             listener.handleEvent(getTextUserInterfaceEvent(command, input));
         }
@@ -128,5 +129,13 @@ public class TextUserInterface implements Observer{
 
     public void print(List<SmartKeyEntry> entries) {
         Util.printEntriesOnConsole(entries);
+    }
+
+    public void illegalInput(String message) {
+       System.out.println(">Illegal Input> "+message);
+    }
+
+    public void error(String errorMessage) {
+        System.out.println(">ERROR> "+errorMessage);
     }
 }

@@ -3,6 +3,7 @@ package ch.cyrillc.x1_fn.app.controller;
 import ch.cyrillc.x1_fn.app.App;
 import ch.cyrillc.x1_fn.app.model.ESmartKeyType;
 import ch.cyrillc.x1_fn.app.model.FnModel;
+import ch.cyrillc.x1_fn.app.model.SmartKeyEntry;
 import ch.cyrillc.x1_fn.app.registryHandler.FnRegistry;
 import ch.cyrillc.x1_fn.app.utils.TextUserInterfaceEvent;
 import ch.cyrillc.x1_fn.app.utils.TextUserInterfaceEventListener;
@@ -36,17 +37,50 @@ public class FnController implements TextUserInterfaceEventListener {
         switch (event.getCmd()){
             case LIST: {
                 ESmartKeyType type = ESmartKeyType.getEnum(event.getOptions());
-                if(type == ESmartKeyType.UNKNOWN){
+                if(type == ESmartKeyType.UNKNOWN && event.getOptions().equals("")){
                     tui.print(model.getAllEntries());
+                } else if(type ==ESmartKeyType.UNKNOWN){
+                    tui.illegalInput("Unkown SmartKeyType");
                 } else {
                     tui.print(model.getEntriesFor(type));
                 }
+                break;
+            }
+
+            case ADD: {
+                if(!event.getOptions().matches(".+ .+ (.*\\.*)")) {
+                    tui.illegalInput("Options are not ok");
+                } else {
+                    String appName = event.getOptions().split(" ")[0];
+                    String smartKeyTypeString = event.getOptions().split(" ")[1];
+                    String appPath = event.getOptions().split(" ")[2];
+                    System.out.println(event.getOptions()+"\nAppName:"+appName+" SmartKey:"+smartKeyTypeString+" appPath"+appPath);
+                    ESmartKeyType smartKeyType =ESmartKeyType.getEnum(smartKeyTypeString);
+                    if(smartKeyType == ESmartKeyType.UNKNOWN ){
+                        tui.illegalInput("Unknown SmartKeyType");
+                    } else if(!checkPath(appPath)) {
+                        tui.illegalInput("Illegal appPath");
+                    } else {
+                        try {
+                            model.addEntry(new SmartKeyEntry(appName,appPath,smartKeyType));
+                        } catch (RegistryException e) {
+                            tui.error("Could not add entry. registryException->"+e);
+                        }
+                    }
+
+                }
+
             }
         }
 
     }
 
-
+    private boolean checkPath(String appPath) {
+        if(appPath.contains("\\")){
+            return true;
+        }
+        return false;
+    }
 
 
 }
