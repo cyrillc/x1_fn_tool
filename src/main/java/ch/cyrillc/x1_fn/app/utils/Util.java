@@ -3,13 +3,11 @@ package ch.cyrillc.x1_fn.app.utils;
 import ch.cyrillc.x1_fn.app.model.SmartKeyEntry;
 
 import java.io.*;
+import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Properties;
+import java.net.URL;
+import java.nio.file.*;
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
@@ -44,16 +42,52 @@ public class Util {
         return returnString;
     }
 
-    public synchronized HashMap<String,String> readVersionFile() throws Exception{
+    /**
+     * Read the version.txt that has been created during the maven build.
+     * @return Hashmap with "version" and "build.date" keys
+     */
+    public synchronized HashMap<String,String> readVersionFile() {
         HashMap<String,String> versionMap= new HashMap<>();
+        URI version = null;
+        Path versionPath = null;
+        Stream<String> versionLines = null;
         try {
-            Stream<String> versionLines = Files.lines(Paths.get(this.getClass().getResource("/version.txt").toURI()));
+            version = getClass().getClassLoader().getResource("version.txt").toURI();
+            //check if the path is inside a Jar or in the normal classpath (for use in IDE and in jar)
+            versionPath = resourceToPath(version.toURL());
+            versionLines = Files.lines(versionPath);
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
             versionLines.map(s -> s.split("="))
                     .forEach(s -> versionMap.put(s[0],s[1]));
-
-        } catch (URISyntaxException | IOException e) {
-            throw new Exception("Error while opening version.txt");
-        }
+            System.out.println("Split up file information -> yes");
         return versionMap;
+    }
+
+
+    private static Path resourceToPath(URL resource)
+            throws IOException,
+            URISyntaxException {
+        Objects.requireNonNull(resource, "Resource URL cannot be null");
+        URI uri = resource.toURI();
+
+        String scheme = uri.getScheme();
+        if (scheme.equals("file")) {
+            return Paths.get(uri);
+        }
+        if (!scheme.equals("jar")) {
+            throw new IllegalArgumentException("Cannot convert to Path: " + uri);
+        }
+
+        String s = uri.toString();
+        int separator = s.indexOf("!/");
+        //Get actual path of file
+        String entryName = s.substring(separator + 2);
+        URI fileURI = URI.create(s.substring(0, separator));
+        FileSystem fs = FileSystems.newFileSystem(fileURI,
+                Collections.<String, Object>emptyMap());
+            return fs.getPath(entryName);
+
     }
 }
