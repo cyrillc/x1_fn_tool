@@ -61,6 +61,11 @@ public class FnRegistry {
         registry.writeStringValue(HKey.HKCU,keyTree,Constants.SMARTKEY_APPATH_NAME,entry.getAppPath());
     }
 
+    public void removeSmartKeyEntry(SmartKeyEntry entry) throws RegistryException{
+        String keyTree = getTreeFor(entry.getSmartKeyType())+"\\"+entry.getAppName();
+        registry.deleteKey(HKey.HKCU,keyTree);
+    }
+
     private String getTreeFor(ESmartKeyType smartKeyType) {
         switch (smartKeyType){
             case FUNCTION: return Constants.SMARTKEY_TREE_FUNCTION;

@@ -7,7 +7,7 @@
     <groupId>ch.cyrillc.x1_fn.app</groupId>
     <artifactId>x1_fn</artifactId>
     <packaging>jar</packaging>
-    <version>0.02dev</version>
+    <version>0.10tui</version>
     <name>X1_FN</name>
 
     <dependencies>
