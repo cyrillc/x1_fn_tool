@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ch.cyrillc.x1_fn.app</groupId>
-    <artifactId>x1_fn_handler</artifactId>
+    <artifactId>x1_fn</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.02dev</version>
     <name>X1_FN</name>
 
     <dependencies>
