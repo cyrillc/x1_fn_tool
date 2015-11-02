@@ -10,6 +10,9 @@ import ch.cyrillc.x1_fn.app.utils.TextUserInterfaceEventListener;
 import ch.cyrillc.x1_fn.app.view.TextUserInterface;
 import com.github.sarxos.winreg.RegistryException;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by CyrillC on 01.11.15.
  */
@@ -49,10 +52,13 @@ public class FnController implements TextUserInterfaceEventListener {
 
             case ADD: {
                 if(checkOptionInput(event.getOptions(),".+ .+ (.*\\.*)")) {
-                    String appName = event.getOptions().split(" ")[0];
-                    String smartKeyTypeString = event.getOptions().split(" ")[1];
-                    String appPath = event.getOptions().split(" ")[2];
-                    ESmartKeyType smartKeyType =ESmartKeyType.getEnum(smartKeyTypeString);
+                    String[] options = event.getOptions().split(" ");
+                    ArrayList<String> optionsList = new ArrayList<String>(Arrays.asList(options));
+                    String appName = optionsList.get(0);
+                    optionsList.remove(0);
+                    ESmartKeyType smartKeyType =ESmartKeyType.getEnum(optionsList.get(0));
+                    optionsList.remove(0);
+                    String appPath = String.join(" ",optionsList);
                     if(smartKeyType == ESmartKeyType.UNKNOWN ){
                         tui.illegalInput("Unknown SmartKeyType");
                     } else if(!checkPath(appPath)) {
