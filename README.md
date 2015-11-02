@@ -1,9 +1,9 @@
-= LENOVO X1 Carbon Fn Utility
+# LENOVO X1 Carbon Fn Utility
 The Lenovo X1 Carbon Ultrabook has an awesome touch-function-key-bar.
 But it is aweful to handle which programs are using which Type. This Utility
 makes it easier for you to organize all this.
 
-==Download
+##Download
 pull sources and compile with Maven
 ```
 mvn compile assembly:single
@@ -11,15 +11,15 @@ mvn compile assembly:single
 To use ist as a single jar file
 
 
-===Features
+##Features
 
-====TUI Version:
+###TUI Version:
 * Add new Applications
 * Remove Applications
 * List all Applications currently in the registry
 
 
-==Future
+##Future
 *Graphical Version
 *Service for automated installation recognition
 
